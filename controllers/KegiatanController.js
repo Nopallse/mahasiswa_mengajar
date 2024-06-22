@@ -5,13 +5,13 @@ const { Kegiatan, Umum, Pendaftaran} = require('../models')
 
 const getKegiatan = async (req, res) => {
     try {
-        const umum = await Umum.findOne({idUser: req.session.userId});
         const kegiatanList = await Kegiatan.findAll({
             where: {
                 status: 'diterima'
             }
         });
         if(req.session.userId){
+            const umum = await Umum.findOne({where:{idUser: req.session.userId}});
             res.render('homeUser', { title: 'Beranda',  kegiatanList,umum});
         }
 
@@ -31,7 +31,7 @@ const detailKegiatan = async (req, res) => {
         if (!kegiatan) {
             return res.status(404).send("Kegiatan not found");
         }
-        res.render('Mahasiswa/detailKegiatan', {
+        res.render('detailKegiatan', {
             kegiatan,
             title: 'Detail Kegiatan'
         });
@@ -45,14 +45,15 @@ const daftarKegiatan = async (req, res) => {
     try {
         const kegiatan = await Kegiatan.findByPk(req.params.id);
 
-        console.log(req.session.userId);
         const user = await Umum.findOne({
             where:{
                 idUser: req.session.userId
             }
         });
-        
-        console.log(user);
+        console.log("ini adalah user nim: ",user.nim);
+        if(!user.nim){
+            return res.redirect('/profile');
+        }
         const pendaftaran = await Pendaftaran.create({
             idKegiatan: kegiatan.idKegiatan,
             nikUmum: user.nik,
