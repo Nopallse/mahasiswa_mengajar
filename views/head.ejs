@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/stylesheets/output.css" />
+    </head>
+    <body>
+        <!-- ========== HEADER ========== -->
+
+
+<!-- ========== HEADER ========== -->
+<header class="shadow-sm fixed top-0 left-0 right-0 flex flex-wrap md:justify-start md:flex-nowrap z-10 w-full py-4 bg-white">
+    <nav class="relative max-w-7xl w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center md:px-8 mx-auto" aria-label="Global">
+    <div class="md:col-span-3">
+        <!-- Logo -->
+        <a class="flex-none inline-block font-semibold focus:outline-black" href="">
+            <img class="w-52 md:w-48 lg:w-64" src="/fti.png" alt="">
+        </a>
+        <!-- End Logo -->
+    </div>
+
+    
+    <!-- Button Group -->
+
+    <div class="flex items-center gap-x-2 ms-auto py-1 md:ps-6 md:order-3 md:col-span-3">
+    
+
+    
+
+        <div class="hs-dropdown relative inline-flex">
+            <button id="hs-dropdown-custom-trigger" type="button" class="hs-dropdown-toggle p-2 py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-semibold text-gray-800 hover:bg-red-700 hover:text-white disabled:opacity-50 disabled:pointer-events-none">
+            <span class="m-2">Masuk/Daftar</span>
+            <span class="text-gray-600 font-medium truncate max-w-[7.5rem]"> </span>
+            <svg class="hs-dropdown-open:rotate-180 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+        
+
+            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-44 bg-white shadow-md rounded-lg p-2 mt-2" aria-labelledby="hs-dropdown-custom-trigger">
+            <a class="flex gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 text-center hover:bg-gray-100 focus:outline-none focus:bg-gray-100" href="/auth">
+                Masuk
+            </a>
+            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 text-center hover:bg-gray-100 focus:outline-none focus:bg-gray-100" href="/auth/registrasi">
+                Daftar
+            </a>
+
+            </div>
+        </div>
+
+
+        <div class="md:hidden">
+        <button type="button" class="hs-collapse-toggle size-[38px] flex justify-center items-center text-sm font-semibold rounded-xl border border-gray-200 text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
+            <svg class="hs-collapse-open:hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+            <svg class="hs-collapse-open:block hidden flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        </div>
+        
+    </div>
+
+    
+    <!-- End Button Group -->
+    
+
+    <!-- Collapse -->
+    <div id="navbar-collapse-with-animation" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block md:w-auto md:basis-auto md:order-2 md:col-span-6 px-3">
+        <div class="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
+        <div>
+            <a class="relative inline-block text-hijau <%= title === 'Beranda' ? 'before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-red-400' : '' %>" href="/" aria-current="page">Beranda</a>
+        </div>
+        <div>
+            <a class="relative inline-block text-hijau <%= title === 'Ajukan' ? 'before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-red-400' : '' %>" href="/ajukan-kegiatan" aria-current="page">Ajukan Kegiatan</a>
+        </div>
+        <div>
+            <a class="inline-block text-hijau hover:text-gray-600 <%= title === 'Tentang' ? 'relative before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-red-400' : '' %>" href="/tentang">Tentang Kami</a>
+        </div>
+        </div>
+    </div>
+    <!-- End Collapse -->
+
+    </nav>
+</header>
+<!-- ========== END HEADER ========== -->

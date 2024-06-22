@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Pendaftaran.belongsTo(models.Mahasiswa, {
-        foreignKey: 'nimMahasiswa',
-        as: 'mahasiswa'
+      Pendaftaran.belongsTo(models.Umum, {
+        foreignKey: 'nikUmum',
+        as: 'umum'
       });
       Pendaftaran.belongsTo(models.Kegiatan, {
         foreignKey: 'idKegiatan',
@@ -39,16 +39,17 @@ module.exports = (sequelize, DataTypes) => {
         key: 'idKegiatan'
       }
     },
-    nimMahasiswa: {
+    nikUmum: {
       allowNull: false,
       type:DataTypes.STRING,
       references: {
-        model: 'Mahasiswas',
-        key: 'nim'
+        model: 'Umums',
+        key: 'nik'
       }
     },
     status: {
-      type:DataTypes.STRING
+      type: DataTypes.ENUM('menunggu', 'diterima', 'ditolak'),
+      defaultValue: 'menunggu',
     },
   }, {
     sequelize,

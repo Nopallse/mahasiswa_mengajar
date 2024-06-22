@@ -19,7 +19,7 @@ module.exports = {
         email: 'mahasiswa@gmail.com',
         password:  await bcrypt.hash('mhs', 10),
         hp: '084567891',
-        role: 'mahasiswa',
+        role: 'user',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -28,7 +28,7 @@ module.exports = {
         email: 'umum@gmail.com',
         password:  await bcrypt.hash('umum', 10),
         hp: '084567892',
-        role: 'umum',
+        role: 'user',
         createdAt: new Date(),
         updatedAt: new Date()
       }
