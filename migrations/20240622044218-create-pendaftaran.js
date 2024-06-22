@@ -11,23 +11,23 @@ module.exports = {
       },
       idKegiatan: {
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Kegiatans',
           key: 'idKegiatan'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       nimMahasiswa: {
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.STRING,
         references: {
           model: 'Mahasiswas',
           key: 'nim'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       status: {
         type: Sequelize.STRING
