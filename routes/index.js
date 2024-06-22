@@ -1,12 +1,11 @@
 var express = require('express');
 var router = express.Router();
 const { getKegiatan , detailKegiatan,daftarKegiatan} = require('../controllers/KegiatanController');
+const { Kegiatan, Umum, Pendaftaran} = require('../models')
 
 /* GET home page. */
 
-router.get('/',getKegiatan, function(req, res, next) {
-    res.redirect('/home', { title: 'Beranda' });
-});
+router.get('/', getKegiatan);
 router.get('/tentang', function(req, res, next) {
     res.render('tentang' , { title: 'Tentang' });
 });

@@ -21,7 +21,7 @@ app.use(session({
 
 // view engine setup
 app.set('views', [
-  path.join(__dirname, 'views/Mahasiswa'),
+  path.join(__dirname, 'views/User'),
   path.join(__dirname, 'views/Admin'),
   path.join(__dirname, 'views'),
 ]);

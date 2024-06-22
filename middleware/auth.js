@@ -26,7 +26,7 @@ const login = async (req, res, next) => {
         req.session.userRole = user.role;
         console.log("Login successful for user:", email);
         if (user.role == "user") {
-            return res.redirect("/");
+            return res.redirect("/home");
         } else if (user.role == "admin") {
             return res.redirect("/admin/dashboard");
         }
@@ -52,12 +52,16 @@ const redirectIfAuthenticated = (req, res, next) => {
 };
 const logout = (req, res, next) => {
     // Hapus data sesi yang relevan
+     console.log("user id adalah"+ req.session.userId);
     req.session.destroy((err) => {
         if (err) {
             console.error("Error while logging out:", err);
             return next(err);
         }
         // Redirect pengguna ke halaman login setelah logout
+        console.log("Logout successful");
+       
+
         res.redirect('/auth');
     });
 };

@@ -3,7 +3,7 @@ var router = express.Router();
 const { login,redirectIfAuthenticated,logout,daftar } = require('../middleware/auth');
 
 /* GET home page. */
-router.get('/',redirectIfAuthenticated, function(req, res, next) {
+router.get('/', function(req, res, next) {
     res.render('login', { title: 'Masuk' });
 });
 router.get('/registrasi',redirectIfAuthenticated, function(req, res, next) {
