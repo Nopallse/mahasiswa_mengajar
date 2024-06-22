@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <img src="/images/bg_unand.jpeg" alt="Universitas Andalas"
+        class="h-screen object-contain absolute top-0 left-0 -z-20" />
+    <div class="flex bg-black/50">
+        <img src="/images/logo_unand.svg" alt="Logo Universitas Andalas" class="w-1/4 m-auto" />
+
+        <div class="w-1/2">
+            <form class="w-full" method="POST" action="/auth/login">
+                <div class="flex flex-col bg-white border shadow-sm rounded-s-xl h-screen">
+                    <h1 class="text-5xl text-center mt-16 mb-3">Login</h1>
+                    <div class="mx-32">
+                        <div class="my-10">
+                            <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email"
+                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  bg-gray-300"
+                                placeholder="Enter your Email here" />
+                        </div>
+                        <div class="">
+                            <label for="password" class="block text-sm font-medium mb-2">Password</label>
+                            <input type="password" id="password" name="password" required
+                                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  bg-gray-300"
+                                placeholder="Enter your Password here" />
+                            <a href="/change-password" class="text-sm text-[#005AAC] mt-2 float-right">
+                                Ubah Password?
+                            </a>
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="bg-[#1ABC00] mt-7 rounded-xl py-3 text-black text-lg mx-32 hover:bg-[#1ABC00] focus:outline-none focus:ring-2 focus:ring-[#1ABC00] focus:ring-opacity-50">
+                        Sign in
+                    </button>
+            </form>
+            <p class="text-center text-[#7C838A] mt-40">Universitas Andalas</p>
+        </div>
+
+    </div>
+    </div>
+    <script src="./node_modules/preline/dist/preline.js"></script>
+</body>
+
+</html>

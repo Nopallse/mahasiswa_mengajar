@@ -29,13 +29,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     idKegiatan: {
       allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       references: {
         model: 'Kegiatans',
         key: 'idKegiatan'
@@ -43,16 +41,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     nimMahasiswa: {
       allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: Sequelize.STRING,
+      type:DataTypes.STRING,
       references: {
         model: 'Mahasiswas',
         key: 'nim'
       }
     },
     status: {
-      type: Sequelize.STRING
+      type:DataTypes.STRING
     },
   }, {
     sequelize,

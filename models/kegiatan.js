@@ -38,8 +38,6 @@ module.exports = (sequelize, DataTypes) => {
     dokumen: DataTypes.STRING,
     nikUmum: {
       allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
       type: DataTypes.STRING,
       references: {
         model: 'Umums',

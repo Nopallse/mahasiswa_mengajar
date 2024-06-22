@@ -21,20 +21,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     idPendaftaran: {
       allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       references: {
         model: 'Pendaftarans',
         key: 'idPendaftaran'
       }
     },
     judul: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
   }, {
     sequelize,
