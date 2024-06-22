@@ -28,14 +28,8 @@
                             <td class="px-4 py-2"><%= pengajuan.status %></td>
                             <td class="px-4 py-2"><%= pengajuan.judul %></td>
                             <td class="px-4 py-2 flex flex-row">
-                                <form action="/admin/terima-kegiatan/<%= pengajuan.idKegiatan %>" method="post">
-                                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Terima</button>
-                                </form>
-                                <form action="/admin/tolak-kegiatan/<%= pengajuan.idKegiatan %>" method="post">
-                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Tolak</button>
-                                </form>
-                                <a href="/detail-kegiatan/<%= pengajuan.idKegiatan %>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Detail</a>
-                            </td>   
+                                <a href="/admin/lihat-pengajuan/<%= pengajuan.idKegiatan %>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat</a>
+                           </td>   
                         </tr>
                     <% }); %>
                 </tbody>

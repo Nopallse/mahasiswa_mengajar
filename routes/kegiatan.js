@@ -5,7 +5,8 @@ const admin = require('../controllers/KegiatanController');
 
 
 router.get('/daftar-pengajuan', requireAuth, admin.daftarPengajuan);
-router.post('/terima-kegiatan/:idKegiatan', requireAuth, admin.terimaKegiatan);
-router.post('/tolak-kegiatan/:idKegiatan', requireAuth, admin.tolakKegiatan);
+router.get('/lihat-pengajuan/:idKegiatan', requireAuth, admin.lihatPengajuan);
+router.post('/terima-pengajuan/:idKegiatan', requireAuth, admin.terimaKegiatan);
+router.post('/tolak-pengajuan/:idKegiatan', requireAuth, admin.tolakKegiatan);
 
 module.exports = router;

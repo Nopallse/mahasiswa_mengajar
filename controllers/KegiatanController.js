@@ -20,6 +20,38 @@ const daftarPengajuan = async (req, res, next) => {
     res.render('admin/daftar_pengajuan', { title: 'Daftar Pengajuan', pengajuans });
 };
 
+const lihatPengajuan = async (req, res, next) => {
+    try {
+        const idKegiatan = req.params.idKegiatan;
+        if (!req.params.idKegiatan) {
+            return res.status(400).json({ message: 'idKegiatan tidak boleh kosong' });
+        }
+
+        const kegiatan = await Kegiatan.findOne({
+            attributes: ['idKegiatan', 'judul', 'gambar', 'deskripsi', 'npsn', 'kuotaRelawan', 'mulai', 'selesai'
+                , 'status', 'dokumen', 'createdAt', 'updatedAt'
+            ],
+            where: {
+                idKegiatan
+            },
+            include: {
+                model: Umum,
+                as: 'umum',
+                attributes: ['nik', 'nim', 'nama', 'tanggalLahir', 'alamat', 'cv', 'universitas']
+            }
+        });
+
+        if (!kegiatan) {
+            return res.status(404).json({ message: 'Kegiatan tidak ditemukan' });
+        }
+
+        res.render('admin/lihat_pengajuan', { title: 'Pengajuan', kegiatan });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal server error', error });
+    }
+};
+
 const terimaKegiatan = async (req, res, next) => {
     try {
         const idKegiatan = req.params.idKegiatan;
@@ -80,6 +112,7 @@ const tolakKegiatan = async (req, res, next) => {
 module.exports = {
     dashboard,
     daftarPengajuan,
+    lihatPengajuan,
     terimaKegiatan,
     tolakKegiatan
 }
