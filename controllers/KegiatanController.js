@@ -5,13 +5,13 @@ const { Kegiatan, Umum, Pendaftaran} = require('../models')
 
 const getKegiatan = async (req, res) => {
     try {
-        const umum = await Umum.findOne({idUser: req.session.userId});
         const kegiatanList = await Kegiatan.findAll({
             where: {
                 status: 'diterima'
             }
         });
         if(req.session.userId){
+            const umum = await Umum.findOne({where: {idUser: req.session.userId}});
             res.render('homeUser', { title: 'Beranda',  kegiatanList,umum});
         }
 
