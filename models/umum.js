@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Umum.hasOne(models.User, {
-        foreignKey: 'idUser',
+        foreignKey: 'id',
         as: 'user',
       });
       Umum.hasMany(models.Kegiatan, {

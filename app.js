@@ -3,59 +3,39 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session')
-var sequelize = require('./models').sequelize;
-var SequelizeStore = require('connect-session-sequelize')(session.Store);
-
-var indexRouter = require('./routes/index');
-var adminRouter = require('./routes/admin.route');
-var mhsRouter = require('./routes/mhs.route');
-var umumRouter = require('./routes/umum.route');
-var authRouter = require('./routes/auth.route');
+var mahasiswaRouter = require('./routes/Mahasiswa');
+var authRouter = require('./routes/auth');
+var adminRouter = require('./routes/admin');
+var session = require('express-session');
 
 var app = express();
 
-app.use(
-	session({
-		secret: "keyboard cat",
-		resave: false,
-		saveUninitialized: false,
-	})
-);
-
-var sessionStore = new SequelizeStore({
-  db: sequelize,
-  tableName: 'Sessions', 
-  checkExpirationInterval: 15 * 60 * 1000,
-  expiration: 24 * 60 * 60 * 1000
-});
-
+// Session middleware
 app.use(session({
-  secret: 'pentagon',
+  secret: 'secret',
   resave: false,
   saveUninitialized: false,
-  store: sessionStore,
-  cookie: { maxAge: 24 * 60 * 60 * 1000 }
+  cookie: { maxAge: 60000 }
 }));
 
-sequelize.sync()
-
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', [
+  path.join(__dirname, 'views/Mahasiswa'),
+  path.join(__dirname, 'views/Admin'),
+  path.join(__dirname, 'views'),
+]);
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/node_modules/preline/dist')));
 
-app.use('/', indexRouter);
-
-app.use('/admin', adminRouter);
-app.use('/user', mhsRouter);
-app.use('/user', umumRouter);
+app.use('/', mahasiswaRouter);
 app.use('/auth', authRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
