@@ -9,9 +9,9 @@ const getKegiatan = async (req, res) => {
             where: {
               status: 'diterima'
             }
-          });        res.render('User/homeUser', {
+          });        res.render('home', {
             kegiatanList,
-            title: 'home'
+            title: 'Beranda'
         });
     } catch (error) {
         console.error("Error fetching kegiatan:", error);

@@ -55,16 +55,14 @@ let temporaryKegiatanData = null;
 const view = async (req, res) => {
   try {
     const events = await Kegiatan.findAll();
-    res.render('mahasiswa/ajukankegiatan', { events, title: "Ajukan Kegiatan" });
+    res.render('ajukankegiatan', { events, title: "Ajukan Kegiatan" });
   } catch (error) {
     console.error('Error in view function:', error);
     res.status(500).send(error.message);
   }
 };
 
-const add = (req, res) => {
-  res.render('mahasiswa/tambahkegiatan', { title: "Tambah Kegiatan" });
-};
+
 
 const store = async (req, res) => {
   try {
@@ -109,7 +107,7 @@ const store = async (req, res) => {
         nikUmum: umum.nik,
       };
 
-      res.render('mahasiswa/pembayaran', { 
+      res.render('pembayaran', { 
         title: "Pembayaran Donasi",
         kegiatanData: temporaryKegiatanData
       });
@@ -127,7 +125,7 @@ const prosesPembayaran = async (req, res) => {
     const { jumlahDonasi } = req.body;
 
     if (jumlahDonasi < 50000) {
-      return res.render('mahasiswa/pembayaran', { 
+      return res.render('pembayaran', { 
         title: "Pembayaran Donasi",
         kegiatanData: temporaryKegiatanData,
         error: "Minimal donasi adalah Rp 50.000"
@@ -140,7 +138,7 @@ const prosesPembayaran = async (req, res) => {
     // Bersihkan data kegiatan sementara
     temporaryKegiatanData = null;
 
-    res.redirect('/kegiatan');
+    res.redirect('/ajukan-kegiatan');
   } catch (error) {
     console.error('Error in processPembayaran:', error);
     res.status(500).send(error.message);
@@ -157,7 +155,7 @@ const deleteEvent = async (req, res) => {
     }
     
     await Kegiatan.destroy({ where: { idKegiatan: id } });
-    res.redirect('/kegiatan');
+    res.redirect('/ajukan-kegiatan');
   } catch (error) {
     console.error('Error in deleteEvent function:', error);
     res.status(500).send(error.message);
@@ -173,7 +171,7 @@ const detail = async (req, res) => {
       return res.status(404).send('Kegiatan tidak ditemukan');
     }
     
-    res.render('mahasiswa/detailajukankegiatan', { kegiatan, title: "Detail Kegiatan", moment });
+    res.render('detailajukankegiatan', { kegiatan, title: "Detail Kegiatan", moment });
   } catch (error) {
     console.error('Error in detailKegiatan function:', error);
     res.status(500).send(error.message);
@@ -182,7 +180,7 @@ const detail = async (req, res) => {
 
 module.exports = {
   view,
-  add,
+
   store,
   deleteEvent,
   detail,

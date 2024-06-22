@@ -4,14 +4,12 @@ const { getKegiatan , detailKegiatan,daftarKegiatan} = require('../controllers/K
 
 /* GET home page. */
 
-router.get('/', function(req, res, next) {
+router.get('/',getKegiatan, function(req, res, next) {
     res.redirect('/home', { title: 'Beranda' });
 });
 router.get('/tentang', function(req, res, next) {
     res.render('tentang' , { title: 'Tentang' });
 });
-
-router.get('/home', getKegiatan);
 
 router.get('/kegiatan/:id', detailKegiatan);
 router.get('/kegiatan/:id/lamar', daftarKegiatan);

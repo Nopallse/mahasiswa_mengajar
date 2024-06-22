@@ -11,13 +11,15 @@ router.get('/', requireAuth, function(req, res, next) {
 
 
 
-router.get('/kegiatan', requireAuth, kegiatanController.view);
-router.get('/kegiatan/add', requireAuth, kegiatanController.add);
-router.post('/kegiatan/store', requireAuth,kegiatanController.store);
+router.get('/ajukan-kegiatan', requireAuth, kegiatanController.view);
+router.get('/ajukan-kegiatan/add', requireAuth, (req, res) => {
+  res.render('addkegiatan', { title: "Tambah Kegiatan" });
+});
+router.post('/ajukan-kegiatan/store', requireAuth,kegiatanController.store);
 // router.post('/kegiatan/pembayaran', kegiatanController.pembayaran);
-router.post('/kegiatan/pembayaran/proses', requireAuth,kegiatanController.prosesPembayaran);
-router.get('/kegiatan/delete/:id', requireAuth,kegiatanController.deleteEvent);
-router.get('/kegiatan/detail/:id',requireAuth, kegiatanController.detail);
+router.post('/ajukan-kegiatan/pembayaran/proses', requireAuth,kegiatanController.prosesPembayaran);
+router.get('/ajukan-kegiatan/delete/:id', requireAuth,kegiatanController.deleteEvent);
+router.get('/ajukan-kegiatan/detail/:id',requireAuth, kegiatanController.detail);
 
 
 
