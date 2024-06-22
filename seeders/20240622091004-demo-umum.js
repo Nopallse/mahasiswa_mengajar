@@ -30,7 +30,7 @@ module.exports = {
         tanggalLahir: new Date('1992-02-02'),
         alamat: 'Jl. Mangga Dua No. 2',
         cv: 'jane_smith_cv.pdf',
-        universitas: 'Institut Teknologi Bandung',
+        universitas: 'Universitas Andalas',
         createdAt: new Date(),
         updatedAt: new Date()
       }

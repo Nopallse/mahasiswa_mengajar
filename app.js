@@ -3,11 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mahasiswaRouter = require('./routes/Mahasiswa');
-
+var indexRouter = require('./routes/index');
+var mahasiswaRouter = require('./routes/mahasiswa');
 var authRouter = require('./routes/auth');
 var adminRouter = require('./routes/admin');
-var kegiatanRouter = require('./routes/kegiatan');
 var session = require('express-session');
 
 var app = express();
@@ -17,12 +16,12 @@ app.use(session({
   secret: 'secret',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 3600 * 1000}
+  cookie: { maxAge: 360000 }
 }));
 
 // view engine setup
 app.set('views', [
-  path.join(__dirname, 'views/Mahasiswa'),
+  path.join(__dirname, 'views/User'),
   path.join(__dirname, 'views/Admin'),
   path.join(__dirname, 'views'),
 ]);
@@ -35,10 +34,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '/node_modules/preline/dist')));
 
+app.use('/', indexRouter);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/', mahasiswaRouter);
 app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
-app.use('/admin', kegiatanRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

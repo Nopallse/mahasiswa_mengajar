@@ -21,6 +21,12 @@ module.exports = {
       npsn: {
         type: Sequelize.STRING
       },
+      namaSekolah: {
+        type: Sequelize.STRING
+      },
+      lokasi: {
+        type: Sequelize.STRING
+      },
       kuotaRelawan: {
         type: Sequelize.INTEGER
       },

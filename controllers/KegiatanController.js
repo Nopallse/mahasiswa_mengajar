@@ -1,118 +1,73 @@
-const { Umum, Kegiatan } = require('../models');
 
-const dashboard = async (req, res, next) => {
+const { where } = require('sequelize');
+const { Kegiatan, Umum, Pendaftaran} = require('../models')
 
-    res.render('admin/dash', { title: 'Transkrip Nilai' });
-    
-};
 
-const daftarPengajuan = async (req, res, next) => {
-    const pengajuans = await Kegiatan.findAll({
-        attributes: ['idKegiatan', 'judul', 'status'],
-
-        include: {
-            model: Umum,
-            as: 'umum',
-            attributes: ['nik', 'nama']
-        }
-    });
-    console.log(pengajuans);
-    res.render('admin/daftar_pengajuan', { title: 'Daftar Pengajuan', pengajuans });
-};
-
-const lihatPengajuan = async (req, res, next) => {
+const getKegiatan = async (req, res) => {
     try {
-        const idKegiatan = req.params.idKegiatan;
-        if (!req.params.idKegiatan) {
-            return res.status(400).json({ message: 'idKegiatan tidak boleh kosong' });
-        }
-
-        const kegiatan = await Kegiatan.findOne({
-            attributes: ['idKegiatan', 'judul', 'gambar', 'deskripsi', 'npsn', 'kuotaRelawan', 'mulai', 'selesai'
-                , 'status', 'dokumen', 'createdAt', 'updatedAt'
-            ],
+        const kegiatanList = await Kegiatan.findAll({
             where: {
-                idKegiatan
-            },
-            include: {
-                model: Umum,
-                as: 'umum',
-                attributes: ['nik', 'nim', 'nama', 'tanggalLahir', 'alamat', 'cv', 'universitas']
+                status: 'diterima'
             }
         });
+        if(req.session.userId){
+            const umum = await Umum.findOne({where: {idUser: req.session.userId}});
+            res.render('homeUser', { title: 'Beranda',  kegiatanList,umum});
+        }
+
+        res.render('home', {
+            kegiatanList,
+            title: 'Beranda'
+        });
+    } catch (error) {
+        console.error("Error fetching kegiatan:", error);
+        res.status(500).send("Internal Server Error");
+    }
+};
+
+const detailKegiatan = async (req, res) => {
+    try {
+        const kegiatan = await Kegiatan.findByPk(req.params.id);
+        if (!kegiatan) {
+            return res.status(404).send("Kegiatan not found");
+        }
+        res.render('Mahasiswa/detailKegiatan', {
+            kegiatan,
+            title: 'Detail Kegiatan'
+        });
+    } catch (error) {
+        console.error("Error fetching kegiatan:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+const daftarKegiatan = async (req, res) => {
+    try {
+        const kegiatan = await Kegiatan.findByPk(req.params.id);
+
+        console.log(req.session.userId);
+        const user = await Umum.findOne({
+            where:{
+                idUser: req.session.userId
+            }
+        });
+        
+        console.log(user);
+        const pendaftaran = await Pendaftaran.create({
+            idKegiatan: kegiatan.idKegiatan,
+            nikUmum: user.nik,
+            status: 'menunggu'
+        });
+
 
         if (!kegiatan) {
-            return res.status(404).json({ message: 'Kegiatan tidak ditemukan' });
+            return res.status(404).send("Kegiatan not found");
         }
-
-        res.render('admin/lihat_pengajuan', { title: 'Pengajuan', kegiatan });
+        res.redirect('/home');
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Internal server error', error });
-    }
-};
-
-const terimaKegiatan = async (req, res, next) => {
-    try {
-        const idKegiatan = req.params.idKegiatan;
-        if (!req.params.idKegiatan) {
-            return res.status(400).json({ message: 'idKegiatan tidak boleh kosong' });
-        }
-
-
-        const kegiatan = Kegiatan.update({
-            status: 'diterima'
-        }, {
-            where: {
-                idKegiatan
-            }
-        })
-
-        if(kegiatan == 0){
-            return res.status(404).json({ message: 'Kegiatan tidak ditemukan' });
-        }
-
-
-        res.redirect('/admin/daftar-pengajuan');
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Internal server error', error });
-    }
-};
-
-const tolakKegiatan = async (req, res, next) => {
-    try {
-        const idKegiatan = req.params.idKegiatan;
-        if (!req.params.idKegiatan) {
-            return res.status(400).json({ message: 'idKegiatan tidak boleh kosong' });
-        }
-    
-        const kegiatan = Kegiatan.update({
-            status: 'ditolak'
-        }, {
-            where: {
-                idKegiatan
-            }
-        })
-
-        if(kegiatan == 0){
-            return res.status(404).json({ message: 'Kegiatan tidak ditemukan' });
-        }
-
-        res.redirect('/admin/daftar-pengajuan');
-
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Internal server error', error });
+        console.error("Error fetching kegiatan:", error);
+        res.status(500).send("Internal Server Error");
     }
 }
 
-
-
-module.exports = {
-    dashboard,
-    daftarPengajuan,
-    lihatPengajuan,
-    terimaKegiatan,
-    tolakKegiatan
-}
+module.exports = { getKegiatan , detailKegiatan, daftarKegiatan};

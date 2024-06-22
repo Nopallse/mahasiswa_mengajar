@@ -26,7 +26,7 @@ const login = async (req, res, next) => {
         req.session.userRole = user.role;
         console.log("Login successful for user:", email);
         if (user.role == "user") {
-            return res.redirect("/");
+            return res.redirect("/home");
         } else if (user.role == "admin") {
             return res.redirect("/admin/dashboard");
         }
@@ -52,14 +52,35 @@ const redirectIfAuthenticated = (req, res, next) => {
 };
 const logout = (req, res, next) => {
     // Hapus data sesi yang relevan
+     console.log("user id adalah"+ req.session.userId);
     req.session.destroy((err) => {
         if (err) {
             console.error("Error while logging out:", err);
             return next(err);
         }
         // Redirect pengguna ke halaman login setelah logout
+        console.log("Logout successful");
+       
+
         res.redirect('/auth');
     });
 };
 
-module.exports = { login, requireAuth,redirectIfAuthenticated,logout };
+const daftar = async (req, res) => {
+    try {
+    const { username, email, newPassword, hp } = req.body;
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const newUser = await User.create({
+        username,
+        email,
+        password: hashedPassword,
+        hp,
+    });
+    res.status(200).json({ message: 'Data berhasil disimpan', data: newUser });
+    } catch (error) {
+    res.status(500).json({ message: 'Terjadi kesalahan', error });
+    }
+};
+
+
+module.exports = { login, requireAuth,redirectIfAuthenticated,logout,daftar };
