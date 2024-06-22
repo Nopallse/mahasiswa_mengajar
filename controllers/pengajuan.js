@@ -1,4 +1,5 @@
 const { Umum, Kegiatan } = require('../models');
+const { Op } = require('sequelize');
 
 const dashboard = async (req, res, next) => {
 
@@ -8,17 +9,35 @@ const dashboard = async (req, res, next) => {
 };
 
 const daftarPengajuan = async (req, res, next) => {
-    const pengajuans = await Kegiatan.findAll({
-        attributes: ['idKegiatan', 'judul', 'status', 'namaSekolah', 'lokasi'],
+    try {
+    const currentDate = new Date();
 
+    const pengajuans = await Kegiatan.findAll({
+        attributes: ['idKegiatan', 'judul', 'status', 'namaSekolah', 'lokasi', 'selesai'],
         include: {
             model: Umum,
             as: 'umum',
             attributes: ['nik', 'nama']
+        },
+        where: {
+            [Op.or]: [
+                { status: 'menunggu' },
+                {
+                    status: 'diterima',
+                    selesai: {
+                        [Op.gt]: currentDate
+                    }
+                }
+            ]
         }
     });
+
     console.log(pengajuans);
     res.render('admin/daftar_pengajuan', { title: 'Daftar Pengajuan', pengajuans });
+} catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Internal server error', error });
+}
 };
 
 const lihatPengajuan = async (req, res, next) => {
@@ -29,8 +48,7 @@ const lihatPengajuan = async (req, res, next) => {
         }
 
         const pengajuan = await Kegiatan.findOne({
-            attributes: ['idKegiatan', 'judul', 'gambar', 'deskripsi', 'npsn', 'namaSekolah', 'lokasi',  'kuotaRelawan', 'mulai', 'selesai'
-                , 'status', 'dokumen', 'createdAt', 'updatedAt'
+            attributes: ['idKegiatan', 'judul', 'gambar', 'deskripsi', 'npsn', 'namaSekolah', 'lokasi',  'kuotaRelawan', 'mulai', 'selesai', 'status', 'dokumen', 'createdAt', 'updatedAt'
             ],
             where: {
                 idKegiatan
@@ -108,6 +126,44 @@ const tolakKegiatan = async (req, res, next) => {
     }
 }
 
+const rekapPengajuan = async (req, res, next) => {
+
+    try {
+    const currentDate = new Date();
+
+    const pengajuans = await Kegiatan.findAll({
+        attributes: [
+            'idKegiatan', 'judul', 'gambar', 'deskripsi', 'npsn', 'namaSekolah', 
+            'lokasi', 'kuotaRelawan', 'mulai', 'selesai', 'status', 'dokumen', 
+            'createdAt', 'updatedAt'
+        ],
+        include: {
+            model: Umum,
+            as: 'umum',
+            attributes: ['nik', 'nama']
+        },
+        where: {
+            [Op.or]: [
+                { status: 'ditolak' },
+                {
+                    status: 'selesai',
+                    selesai: {
+                        [Op.lt]: currentDate
+                    }
+                }
+            ]
+        }
+        
+    });
+    console.log(pengajuans);
+    res.render('admin/rekap_pengajuan', { title: 'Rekap Pengajuan', pengajuans });
+} catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Internal server error', error });
+}
+
+};
+
 
 
 module.exports = {
@@ -115,5 +171,6 @@ module.exports = {
     daftarPengajuan,
     lihatPengajuan,
     terimaKegiatan,
-    tolakKegiatan
+    tolakKegiatan,
+    rekapPengajuan
 }

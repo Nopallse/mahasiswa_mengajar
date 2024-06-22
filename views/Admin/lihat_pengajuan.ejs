@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -92,46 +91,83 @@
                       <h2 class="text-xl font-semibold text-white">
                         Detail Pengajuan
                       </h2>
-                      <p class="text-sm text-gray-600">Detail Dari Setiap pengajuan.</p>
+                      <p class="text-sm text-white">Detail Dari Setiap pengajuan.</p>
                     </div>
                   </div>
       
-                  <div id="detail-pengajuan" class="mt-4 mx-64 flex flex-col justify-center items-center">
+                  <div id="detail-pengajuan" class="my-4 mx-64 flex flex-col justify-center items-center">
+                    <h1 class="mx-4 text-3xl font-bold"> <%= pengajuan.judul %></h1>
                     <img
                       class="object-cover w-52"
                       src="/images/<%= pengajuan.gambar %>"
                       alt="Image Description"
                     />
-                    <div class="bg-white shadow overflow-hidden sm:rounded-lg p mt-4 mb-4 w-full">
+                    <div class="p mt-4 mb-4 w-full">
       
-                    <p class="mx-4 text-xl font-medium text-gray-800 mb-2">
-                      Id: <%= pengajuan.idKegiatan %>
+                    <p class="mx-4 text-xl text-center font-medium text-black mb-2">
+                    Lokasi: <%= pengajuan.namaSekolah %>, NPSN: <%= pengajuan.npsn %>
                     </p>
                   </div>
-                  <div class="bg-white shadow overflow-hidden sm:rounded-lg p mb-4 w-full">
+                  <div class="p mb-4 w-full">
       
-                    <p class="mx-4 text-xl font-medium text-gray-800 mb-2">
-                      Nama Pengaju: <%= pengajuan.umum.nama %>
+                    <p class="mx-4 text-xl font-medium text-black mb-2">
+                     <%= pengajuan.deskripsi %>
                     </p>
                   </div>
-                  <div class="bg-white shadow overflow-hidden sm:rounded-lg p mb-4 w-full">
+                  <div class="p mb-4 w-full">
       
-                    <p class="mx-4 text-xl font-medium text-gray-800 mb-2">
-                     Lokasi: <%= pengajuan.lokasi %>
+                    <p class="mx-4 text-xl font-medium text-black mb-2">
+                     Jumlah Relawan yang dibutuhkan: <%= pengajuan.kuotaRelawan %>
                     </p>
                   </div>
-                  <div class="bg-white shadow overflow-hidden sm:rounded-lg p mb-4 w-full">
+                  <div class="p mb-4 w-full">
       
-                    <p class="mx-4 text-xl font-medium text-gray-800 mb-2">
-                     Relawans: <%= pengajuan.kuotaRelawan %>
+                    <p class="mx-4 text-xl font-medium text-black mb-2">
+                     Waktu Kegiatan: <%= new Date(pengajuan.mulai).toLocaleDateString() %> - <%= new Date(pengajuan.selesai).toLocaleDateString()%>
                     </p>
                   </div>
-                  <div class="bg-white shadow overflow-hidden sm:rounded-lg p mb-4 w-full">
-      
-                    <p class="mx-4 text-xl font-medium text-gray-800 mb-2">
-                     Deskripsi:  <%= pengajuan.deskripsi %>
-                    </p>
+                  <div class="flex flex-row">
+                  <a
+                  href="uploads/<%= pengajuan.dokumen %>"
+                  class="py-3 mr-2 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-100 text-black hover:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-white/10 dark:hover:bg-white/20 dark:text-white dark:hover:text-white">
+                  Download
+                  </a>
+                  <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-100 text-gray-500 hover:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-white/10 dark:hover:bg-white/20 dark:text-white dark:hover:text-neutral-300">
+                    Data Pengaju
+                  </button>
+                  
+                  <div id="hs-slide-down-animation-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
+                    <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+                      <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+                        <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+                          <h3 class="font-bold text-gray-800 dark:text-white">
+                            Data Pengaju
+                          </h3>
+                          <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700" data-hs-overlay="#hs-slide-down-animation-modal">
+                            <span class="sr-only">Close</span>
+                            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M18 6 6 18"></path>
+                              <path d="m6 6 12 12"></path>
+                            </svg>
+                          </button>
+                        </div>
+                        <div class="p-4 overflow-y-auto">
+                          <p class="mt-1 text-gray-800 dark:text-neutral-400">
+                            Nama: <%= pengajuan.umum.nama %> <br>
+                            NIK: <%= pengajuan.umum.nik %> <br>
+                            Tanggal Lahir: <%= new Date(pengajuan.umum.tanggalLahir).toLocaleDateString() %> <br>
+                            Alamat: <%= pengajuan.umum.alamat %> <br>
+                          </p>
+                        </div>
+                        <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                          <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-overlay="#hs-slide-down-animation-modal">
+                            Close
+                          </button> 
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                </div>
                 </div>
                   
                   <!-- End Card -->
@@ -144,21 +180,39 @@
                   <div
                     class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200"
                   >
-                    <div>
-                      <p class="text-sm text-gray-600">
-                        <span class="font-semibold text-gray-800">12</span> results
-                      </p>
-                    </div>
+                  <div class="flex flex-row">
+                    <% if (pengajuan.status === 'diterima') { %>
+                      <!-- Icon -->
+                      <span class="inline-flex justify-center items-center size-[46px] rounded-lg bg-yellow-400 text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>                    
+                      </span>
+                      <!-- End Icon -->
+                    <% } else { %>
+                      <form action="/admin/terima-pengajuan/<%=pengajuan.idKegiatan%>" method="post">
+                        <button
+                        type="submit"
+                        class="py-3 px-4 mr-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-teal-100 text-teal-800 hover:bg-teal-200 disabled:opacity-50 disabled:pointer-events-none dark:hover:bg-teal-900 dark:text-teal-500 dark:hover:text-teal-400"
+                      >
+                        Setujui
+                      </button>
+                      </form>
+                      <form action="/admin/tolak-pengajuan/<%= pengajuan.idKegiatan %>" method="post">
+                        <button type="submit" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 disabled:opacity-50 disabled:pointer-events-none dark:hover:bg-red-900 dark:text-red-500 dark:hover:text-red-400">
+                          Tolak
+                        </button>
+                      </form>
+                    <% } %>
+                  </div>
       
                     <div>
                       <div class="inline-flex gap-x-2">
-                        <button
+                        <a href= "/admin/daftar-pengajuan"
                           type="button"
-                          class="py-2 px-8 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                          onclick="window.location.href='/admin/daftar-pengajuan'"
-                        >
+                          class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:hover:bg-blue-900 dark:text-blue-400">
                           Kembali
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -171,5 +225,6 @@
         </div>
       </div>
 </div>
+<script src=/preline.js"></script>
 </body>
 </html>
