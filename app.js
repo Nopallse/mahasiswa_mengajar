@@ -3,14 +3,39 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var sequelize = require('./models').sequelize;
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+var adminRouter = require('./routes/admin.route');
+var mhsRouter = require('./routes/mhs.route');
+var umumRouter = require('./routes/umum.route');
+var authRouter = require('./routes/auth.route');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+var sessionStore = new SequelizeStore({
+  db: sequelize,
+  tableName: 'sessions', 
+  checkExpirationInterval: 15 * 60 * 1000,
+  expiration: 24 * 60 * 60 * 1000
+});
+
+app.use(session({
+  secret: 'pentagon',
+  resave: false,
+  saveUninitialized: false,
+  store: sessionStore,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }
+}));
+
+
+
+
+sequelize.sync()
+
+
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
@@ -25,8 +50,11 @@ app.set("views", [
   path.join(__dirname, "/views"),
 ]);
 
+app.use('/admin', adminRouter);
+app.use('/user', mhsRouter);
+app.use('/user', umumRouter);
+app.use('/auth', authRouter);
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
