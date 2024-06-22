@@ -19,6 +19,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set("views", [
+  path.join(__dirname, "/views/admin"),
+  path.join(__dirname, "/views/relawan"),
+  path.join(__dirname, "/views"),
+]);
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
