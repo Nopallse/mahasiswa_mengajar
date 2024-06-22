@@ -33,7 +33,19 @@ const detailKegiatan = async (req, res) => {
         if (!kegiatan) {
             return res.status(404).send("Kegiatan not found");
         }
+        const umum = await Umum.findOne({where:{idUser: req.session.userId}});
+ 
+        const pendaftaran = await Pendaftaran.findOne({
+            where:{
+                idKegiatan: req.params.id,
+                nikUmum: umum.nik
+            }
+        });
+
+        console.log("ini adalah pendaftaran: ",pendaftaran);
+
         res.render('detailKegiatan', {
+            pendaftaran,
             kegiatan,
             title: 'Detail Kegiatan'
         });
