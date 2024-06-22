@@ -19,19 +19,20 @@ module.exports = {
         type: Sequelize.STRING
       },
       npsn: {
-        type: Sequelize.INTEGER
-      },
-      namaSekolah: {
         type: Sequelize.STRING
       },
       kuotaRelawan: {
         type: Sequelize.INTEGER
       },
-      deadLine: {
+      mulai: {
+        type: Sequelize.DATE
+      },
+      selesai: {
         type: Sequelize.DATE
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM('menunggu', 'diterima', 'ditolak'),
+        defaultValue: 'menunggu',
       },
       dokumen: {
         type: Sequelize.STRING

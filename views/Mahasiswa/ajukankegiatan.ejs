@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Daftar Kegiatan</title>
+  <link rel="stylesheet" href="/stylesheets/output.css" />
+</head>
+<body class="bg-gray-100">
+
+  <div class="container mx-auto py-10">
+    <h1 class="text-2xl font-bold mb-5">Daftar Kegiatan</h1>
+    <ul class="bg-white p-6 rounded shadow-md mb-5">
+      <% events.forEach(function(event) { %>
+        <li class="flex justify-between items-center mb-3">
+          <div>
+            <span class="font-bold"><%= event.judul %></span>
+            <p class="text-gray-600"><%= event.status %></p>
+          </div>
+          <div>
+            <% if (event.status !== 'diterima') { %>
+              <a href="/kegiatan/delete/<%= event.idKegiatan %>" class="text-red-500 hover:underline">Hapus</a>
+            <% } %>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+    
+    <a href="/kegiatan/add" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Tambah Kegiatan Baru</a>
+  </div>
+
+  <script src="/preline.js"></script>
+</body>
+</html>
