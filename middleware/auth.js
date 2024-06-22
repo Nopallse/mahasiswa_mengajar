@@ -25,9 +25,9 @@ const login = async (req, res, next) => {
         req.session.userId = user.id;
         req.session.userRole = user.role;
         console.log("Login successful for user:", email);
-        if (user.id == "1") {
+        if (user.role == "mahasiswa" || user.role == "umum") {
             return res.redirect("/");
-        } else if (user.id == "2") {
+        } else if (user.role == "admin") {
             return res.redirect("/admin/dashboard");
         }
     } catch (error) {
@@ -43,8 +43,10 @@ const requireAuth = (req, res, next) => {
     next();
 };
 const redirectIfAuthenticated = (req, res, next) => {
-    if (req.session.userRole==='mahasiswa') {
+    if (req.session.userRole==='mahasiswa' || req.session.userRole==='umum') {
         return res.redirect('/'); // Redirect to home page if authenticated
+    } else if   (req.session.userRole==='admin') {
+        return res.redirect('/admin/dashboard'); // Redirect to home page if authenticated
     }
     next();
 };

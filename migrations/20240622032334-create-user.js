@@ -9,32 +9,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      username: {
+        type: Sequelize.STRING
+      },
       email: {
         type: Sequelize.STRING
       },
       password: {
         type: Sequelize.STRING
       },
+      hp: {
+        type: Sequelize.STRING
+      },
       role: {
-        type: Sequelize.STRING
-      },
-      nama: {
-        type: Sequelize.STRING
-      },
-      nim_nip: {
-        type: Sequelize.STRING
-      },
-      fakultas: {
-        type: Sequelize.STRING
-      },
-      jurusan: {
-        type: Sequelize.STRING
-      },
-      alamat: {
-        type: Sequelize.STRING
-      },
-      no_telp: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM('admin', 'mahasiswa', 'umum')
       },
       createdAt: {
         allowNull: false,
