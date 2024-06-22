@@ -19,7 +19,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      nimUmum: {
+      nikUmum: {
         allowNull: false,
         type: Sequelize.STRING,
         references: {

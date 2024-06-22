@@ -31,7 +31,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       status: {
-        type: Sequelize.ENUM('menunggu', 'diterima', 'ditolak')
+        type: Sequelize.STRING
       },
       dokumen: {
         type: Sequelize.STRING

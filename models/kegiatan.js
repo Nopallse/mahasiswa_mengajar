@@ -30,11 +30,14 @@ module.exports = (sequelize, DataTypes) => {
     judul: DataTypes.STRING,
     gambar: DataTypes.STRING,
     deskripsi: DataTypes.STRING,
-    npsn: DataTypes.INTEGER,
+    npsn: DataTypes.STRING,
     kuotaRelawan: DataTypes.INTEGER,
-    mulai: DataTypes.DATEONLY,
-    selesai: DataTypes.DATEONLY,
-    status: DataTypes.ENUM('menunggu', 'diterima', 'ditolak'),
+    mulai: DataTypes.DATE,
+    selesai: DataTypes.DATE,
+    status: {
+      type: DataTypes.ENUM('menunggu', 'diterima', 'ditolak'),
+      defaultValue: 'menunggu',
+    },
     dokumen: DataTypes.STRING,
     nikUmum: {
       allowNull: false,
