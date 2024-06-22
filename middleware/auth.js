@@ -25,7 +25,7 @@ const login = async (req, res, next) => {
         req.session.userId = user.id;
         req.session.userRole = user.role;
         console.log("Login successful for user:", email);
-        if (user.role == "mahasiswa" || user.role == "umum") {
+        if (user.role == "user") {
             return res.redirect("/");
         } else if (user.role == "admin") {
             return res.redirect("/admin/dashboard");
@@ -43,7 +43,7 @@ const requireAuth = (req, res, next) => {
     next();
 };
 const redirectIfAuthenticated = (req, res, next) => {
-    if (req.session.userRole==='mahasiswa' || req.session.userRole==='umum') {
+    if (req.session.userRole==='user') {
         return res.redirect('/'); // Redirect to home page if authenticated
     } else if   (req.session.userRole==='admin') {
         return res.redirect('/admin/dashboard'); // Redirect to home page if authenticated

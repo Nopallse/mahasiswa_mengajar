@@ -19,12 +19,12 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      nimMahasiswa: {
+      nimUmum: {
         allowNull: false,
         type: Sequelize.STRING,
         references: {
-          model: 'Mahasiswas',
-          key: 'nim'
+          model: 'Umums',
+          key: 'nik'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'

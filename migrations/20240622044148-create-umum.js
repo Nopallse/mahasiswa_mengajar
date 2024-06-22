@@ -16,12 +16,29 @@ module.exports = {
       nik: {
         allowNull: false,
         primaryKey: true,
+        uniqe: true,
+        type: Sequelize.STRING
+      },
+      nim: {
+        allowNull: true,
+        uniqe: true,
         type: Sequelize.STRING
       },
       nama: {
         type: Sequelize.STRING
       },
+      tanggalLahir: {
+        type: Sequelize.DATE
+      },
       alamat: {
+        type: Sequelize.STRING
+      },
+      cv: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      universitas: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
