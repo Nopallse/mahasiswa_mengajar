@@ -123,7 +123,7 @@
                   <%= kegiatan.kuotaRelawan %>
                 </p>
                 <p class="text mb-2"><strong>Waktu Kegiatan:</strong>
-                  <%= kegiatan.mulai %> - <%= kegiatan.selesai %>
+                  <%= moment(kegiatan.mulai).format('DD') %>- <%= moment(kegiatan.selesai).format('DD MMMM YYYY') %>
                 </p>
                 <p class="text mb-2"><strong>Sekolah :</strong>
                   <%= kegiatan.kuotaRelawan %>
@@ -144,7 +144,7 @@
                       <%= kegiatan.kuotaRelawan %>
                     </p>
                     <p class="text mb-2"><strong>Waktu Kegiatan:</strong>
-                      <%= kegiatan.mulai %> - <%= kegiatan.selesai %>
+                      <%= moment(kegiatan.mulai).format('DD') %>- <%= moment(kegiatan.selesai).format('DD MMMM YYYY') %>
                     </p>
                     <p class="text mb-2"><strong>Sekolah :</strong>
                       <%= pendaftaran.status %>
@@ -163,7 +163,7 @@
             </div>
             <div class="flex justify-between mt-4">
 
-              <a href="/kegiatan" class="text-blue-600 hover:underline">Kembali ke Daftar Kegiatan</a>
+              <a href="/home" class="text-blue-600 hover:underline">Kembali ke Daftar Kegiatan</a>
             </div>
         </div>
       </div>

@@ -167,7 +167,8 @@
                 </td>
               </div>
               <p class="text-gray-500 mb-2"><strong>Waktu Kegiatan:</strong>
-                <%= kegiatan.mulai %> - <%= kegiatan.selesai %>
+                <%= moment(kegiatan.mulai).format('DD') %>- <%= moment(kegiatan.selesai).format('DD MMMM YYYY') %>
+              
               </p>
             </div>
 

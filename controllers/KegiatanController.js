@@ -1,6 +1,7 @@
 
 const { where } = require('sequelize');
 const { Kegiatan, Umum, Pendaftaran} = require('../models')
+const moment = require("moment");
 
 
 const getKegiatan = async (req, res) => {
@@ -14,12 +15,13 @@ const getKegiatan = async (req, res) => {
 
             const umum = await Umum.findOne({where:{idUser: req.session.userId}});
 
-            res.render('homeUser', { title: 'Beranda',  kegiatanList, umum});
+            res.render('homeUser', { title: 'Beranda',  kegiatanList, umum, moment});
         }
 
         res.render('home', {
             kegiatanList,
-            title: 'Beranda'
+            title: 'Beranda',
+            moment
         });
     } catch (error) {
         console.error("Error fetching kegiatan:", error);
@@ -47,7 +49,8 @@ const detailKegiatan = async (req, res) => {
         res.render('detailKegiatan', {
             pendaftaran,
             kegiatan,
-            title: 'Detail Kegiatan'
+            title: 'Detail Kegiatan',
+            moment
         });
     } catch (error) {
         console.error("Error fetching kegiatan:", error);
