@@ -7,6 +7,7 @@ var indexRouter = require('./routes/index');
 var mahasiswaRouter = require('./routes/mahasiswa');
 var authRouter = require('./routes/auth');
 var adminRouter = require('./routes/admin');
+var pengajuanRouter = require('./routes/pengajuan');
 var session = require('express-session');
 
 var app = express();
@@ -39,6 +40,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/', mahasiswaRouter);
 app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
+app.use('/admin', pengajuanRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

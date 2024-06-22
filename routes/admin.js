@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const { login, requireAuth } = require('../middleware/auth');
-const admin = require('../controllers/KegiatanController');
+const pengajuan = require('../controllers/pengajuan');
 
 /* GET home page. */
 
-
-router.get('/dashboard', requireAuth, admin.dashboard);
+router.get('/dashboard', requireAuth, pengajuan.dashboard);
 
 module.exports = router;

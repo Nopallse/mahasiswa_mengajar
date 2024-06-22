@@ -2,13 +2,14 @@ const { Umum, Kegiatan } = require('../models');
 
 const dashboard = async (req, res, next) => {
 
+
     res.render('admin/dash', { title: 'Transkrip Nilai' });
     
 };
 
 const daftarPengajuan = async (req, res, next) => {
     const pengajuans = await Kegiatan.findAll({
-        attributes: ['idKegiatan', 'judul', 'status'],
+        attributes: ['idKegiatan', 'judul', 'status', 'namaSekolah', 'lokasi'],
 
         include: {
             model: Umum,
@@ -27,8 +28,8 @@ const lihatPengajuan = async (req, res, next) => {
             return res.status(400).json({ message: 'idKegiatan tidak boleh kosong' });
         }
 
-        const kegiatan = await Kegiatan.findOne({
-            attributes: ['idKegiatan', 'judul', 'gambar', 'deskripsi', 'npsn', 'kuotaRelawan', 'mulai', 'selesai'
+        const pengajuan = await Kegiatan.findOne({
+            attributes: ['idKegiatan', 'judul', 'gambar', 'deskripsi', 'npsn', 'namaSekolah', 'lokasi',  'kuotaRelawan', 'mulai', 'selesai'
                 , 'status', 'dokumen', 'createdAt', 'updatedAt'
             ],
             where: {
@@ -41,11 +42,11 @@ const lihatPengajuan = async (req, res, next) => {
             }
         });
 
-        if (!kegiatan) {
+        if (!pengajuan) {
             return res.status(404).json({ message: 'Kegiatan tidak ditemukan' });
         }
 
-        res.render('admin/lihat_pengajuan', { title: 'Pengajuan', kegiatan });
+        res.render('admin/lihat_pengajuan', { title: 'Pengajuan', pengajuan });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Internal server error', error });
