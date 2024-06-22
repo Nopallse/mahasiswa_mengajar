@@ -11,7 +11,9 @@ const getKegiatan = async (req, res) => {
             }
         });
         if(req.session.userId){
+
             const umum = await Umum.findOne({where:{idUser: req.session.userId}});
+
             res.render('homeUser', { title: 'Beranda',  kegiatanList,umum});
         }
 
