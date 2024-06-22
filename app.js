@@ -4,13 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session')
+var sequelize = require('./models').sequelize;
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin.route');
 var mhsRouter = require('./routes/mhs.route');
 var umumRouter = require('./routes/umum.route');
+var authRouter = require('./routes/auth.route');
 
 var app = express();
 
@@ -50,11 +51,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 app.use('/admin', adminRouter);
 app.use('/user', mhsRouter);
 app.use('/user', umumRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

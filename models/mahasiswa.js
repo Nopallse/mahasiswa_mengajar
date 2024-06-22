@@ -23,14 +23,11 @@ module.exports = (sequelize, DataTypes) => {
   Mahasiswa.init({
     nim: {  
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
       type: DataTypes.STRING
     },
     idUser: {
       allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
       type: DataTypes.INTEGER,
       references: {
         model: 'Users',
