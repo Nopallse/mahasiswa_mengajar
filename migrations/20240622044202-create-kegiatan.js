@@ -38,13 +38,13 @@ module.exports = {
       },
       nikUmum: {
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.STRING,
         references: {
           model: 'Umums',
           key: 'nik'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

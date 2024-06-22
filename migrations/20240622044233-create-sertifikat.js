@@ -11,13 +11,13 @@ module.exports = {
       },
       idPendaftaran: {
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Pendaftarans',
           key: 'idPendaftaran'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       judul: {
         type: Sequelize.STRING
