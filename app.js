@@ -6,6 +6,7 @@ var logger = require('morgan');
 var mahasiswaRouter = require('./routes/Mahasiswa');
 var authRouter = require('./routes/auth');
 var adminRouter = require('./routes/admin');
+var kegiatanRouter = require('./routes/kegiatan');
 var session = require('express-session');
 
 var app = express();
@@ -15,7 +16,7 @@ app.use(session({
   secret: 'secret',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 3600 * 1000}
 }));
 
 // view engine setup
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, '/node_modules/preline/dist')));
 app.use('/', mahasiswaRouter);
 app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
+app.use('/admin', kegiatanRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

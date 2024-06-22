@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widKegiatanth=device-widKegiatanth, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mx-auto px-4">
+        <h1 class="text-xl font-semibold my-4">Daftar Pengajuan</h1>
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 py-2">NIK</th>
+                        <th class="px-4 py-2">Nama</th>
+                        <th class="px-4 py-2">Status</th>
+                        <th class="px-4 py-2">Kegiatan</th>
+                        <th class="px-4 py-2">Opsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% pengajuans.forEach(function(pengajuan) { %>
+                        <tr class="border-b">
+                            <td class="px-4 py-2"><%= pengajuan.umum.nik %></td>
+                            <td class="px-4 py-2"><%= pengajuan.umum.nama %></td>
+                            <td class="px-4 py-2"><%= pengajuan.status %></td>
+                            <td class="px-4 py-2"><%= pengajuan.judul %></td>
+                            <td class="px-4 py-2 flex flex-row">
+                                <form action="/admin/terima-kegiatan/<%= pengajuan.idKegiatan %>" method="post">
+                                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Terima</button>
+                                </form>
+                                <form action="/admin/tolak-kegiatan/<%= pengajuan.idKegiatan %>" method="post">
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Tolak</button>
+                                </form>
+                                <a href="/detail-kegiatan/<%= pengajuan.idKegiatan %>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Detail</a>
+                            </td>   
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

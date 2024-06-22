@@ -31,10 +31,10 @@ module.exports = (sequelize, DataTypes) => {
     gambar: DataTypes.STRING,
     deskripsi: DataTypes.STRING,
     npsn: DataTypes.INTEGER,
-    namaSekolah: DataTypes.STRING,
     kuotaRelawan: DataTypes.INTEGER,
-    deadLine: DataTypes.DATE,
-    status: DataTypes.STRING,
+    mulai: DataTypes.DATEONLY,
+    selesai: DataTypes.DATEONLY,
+    status: DataTypes.ENUM('menunggu', 'diterima', 'ditolak'),
     dokumen: DataTypes.STRING,
     nikUmum: {
       allowNull: false,
