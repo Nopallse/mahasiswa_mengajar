@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheets/output.css" />
+  <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.min.js"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Tambah Kegiatan Baru</h1>
+    <form action="/kegiatan/store" method="POST" class="bg-white shadow-md rounded-lg p-6" enctype="multipart/form-data">
+      
+      <div class="mb-4">
+        <label for="judul" class="block text-sm font-medium mb-2 dark:text-white">Judul:</label>
+        <input type="text" id="judul" name="judul" required class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+      </div>
+      
+      <div class="mb-4">
+        <label for="gambar" class="block text-sm font-medium mb-2 dark:text-white">Gambar:</label>
+        <div class="flex items-center gap-x-4">
+          <label class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+            <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+            Pilih file
+            <input type="file" name="gambar" id="gambar" class="sr-only" accept="image/*">
+          </label>
+          <span id="gambar-name" class="text-sm text-gray-500"></span>
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label for="deskripsi" class="block text-sm font-medium mb-2 dark:text-white">Deskripsi:</label>
+        <textarea id="deskripsi" name="deskripsi" required class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="4"></textarea>
+      </div>
+      
+      <div class="mb-4">
+        <label for="npsn" class="block text-sm font-medium mb-2 dark:text-white">NPSN:</label>
+        <input type="text" id="npsn" name="npsn" required class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+      </div>
+      
+      <div class="mb-4">
+        <label for="namaSekolah" class="block text-sm font-medium mb-2 dark:text-white">Nama Sekolah:</label>
+        <input type="text" id="namaSekolah" name="namaSekolah" required class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+      </div>
+      <div class="mb-4">
+        <label for="lokasi" class="block text-sm font-medium mb-2 dark:text-white">Lokasi:</label>
+        <input type="text" id="lokasi" name="lokasi" required class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+      </div>
+      
+      <div class="mb-4">
+        <label for="kuotaRelawan" class="block text-sm font-medium mb-2 dark:text-white">Kuota Relawan:</label>
+        <input type="number" id="kuotaRelawan" name="kuotaRelawan" required class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+      </div>
+      
+      <div class="mb-4">
+        <label for="mulai" class="block text-sm font-medium mb-2 dark:text-white">Mulai:</label>
+        <input type="date" id="mulai" name="mulai" required class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+      </div>
+      
+      <div class="mb-4">
+        <label for="selesai" class="block text-sm font-medium mb-2 dark:text-white">Selesai:</label>
+        <input type="date" id="selesai" name="selesai" required class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+      </div>
+      
+      <div class="mb-6">
+        <label for="dokumen" class="block text-sm font-medium mb-2 dark:text-white">Dokumen:</label>
+        <div class="flex items-center gap-x-4">
+          <label class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+            <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+            Pilih file
+            <input type="file" name="dokumen" id="dokumen" class="sr-only">
+          </label>
+          <span id="dokumen-name" class="text-sm text-gray-500"></span>
+        </div>
+      </div>
+      
+      <button type="submit" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+        Tambah
+      </button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('gambar').addEventListener('change', function(e) {
+      var fileName = e.target.files[0].name;
+      document.getElementById('gambar-name').textContent = fileName;
+    });
+
+    document.getElementById('dokumen').addEventListener('change', function(e) {
+      var fileName = e.target.files[0].name;
+      document.getElementById('dokumen-name').textContent = fileName;
+    });
+  </script>
+</body>
+</html>

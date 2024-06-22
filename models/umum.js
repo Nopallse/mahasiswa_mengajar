@@ -23,15 +23,33 @@ module.exports = (sequelize, DataTypes) => {
   Umum.init({
     nik:{
       type: DataTypes.STRING,
+      unique: true,
       primaryKey: true
     },
+    nim: {  
+      allowNull: true,
+      unique: true,
+      type: DataTypes.STRING
+    },
     nama: DataTypes.STRING,
-    alamat: DataTypes.DATE,
-    phone: DataTypes.STRING,
     idUser: {
       type: DataTypes.INTEGER,
       unique: true,
+    },  
+    tanggalLahir: {
+      type: DataTypes.DATE
     },
+    alamat: {
+      type: DataTypes.STRING
+    },
+    cv: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+    universitas: {
+      allowNull: true,
+      type: DataTypes.STRING
+    }, 
   }, {
     sequelize,
     modelName: 'Umum',

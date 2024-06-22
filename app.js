@@ -35,7 +35,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '/node_modules/preline/dist')));
 
 app.use('/', indexRouter);
-app.use('/mahasiswa', mahasiswaRouter);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/', mahasiswaRouter);
 app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
 

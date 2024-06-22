@@ -25,7 +25,7 @@ const login = async (req, res, next) => {
         req.session.userId = user.id;
         req.session.userRole = user.role;
         console.log("Login successful for user:", email);
-        if (user.role == "mahasiswa" || user.role == "umum") {
+        if (user.role == "user") {
             return res.redirect("/");
         } else if (user.role == "admin") {
             return res.redirect("/admin/dashboard");
@@ -43,7 +43,7 @@ const requireAuth = (req, res, next) => {
     next();
 };
 const redirectIfAuthenticated = (req, res, next) => {
-    if (req.session.userRole==='mahasiswa' || req.session.userRole==='umum') {
+    if (req.session.userRole==='user') {
         return res.redirect('/'); // Redirect to home page if authenticated
     } else if   (req.session.userRole==='admin') {
         return res.redirect('/admin/dashboard'); // Redirect to home page if authenticated
@@ -62,4 +62,21 @@ const logout = (req, res, next) => {
     });
 };
 
-module.exports = { login, requireAuth,redirectIfAuthenticated,logout };
+const daftar = async (req, res) => {
+    try {
+    const { username, email, newPassword, hp } = req.body;
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const newUser = await User.create({
+        username,
+        email,
+        password: hashedPassword,
+        hp,
+    });
+    res.status(200).json({ message: 'Data berhasil disimpan', data: newUser });
+    } catch (error) {
+    res.status(500).json({ message: 'Terjadi kesalahan', error });
+    }
+};
+
+
+module.exports = { login, requireAuth,redirectIfAuthenticated,logout,daftar };
