@@ -54,7 +54,15 @@ let temporaryKegiatanData = null;
 // Controller functions
 const view = async (req, res) => {
   try {
-    const events = await Kegiatan.findAll();
+
+    const umum = await Umum.findOne({where:{
+      idUser: req.session.userId
+    }})
+    const events = await Kegiatan.findAll({
+      where: {
+        nikUmum: umum.nik
+      }
+    });
     res.render('ajukankegiatan', { events, title: "Ajukan Kegiatan" });
   } catch (error) {
     console.error('Error in view function:', error);

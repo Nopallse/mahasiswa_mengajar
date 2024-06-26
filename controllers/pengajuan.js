@@ -8,8 +8,27 @@ const dashboard = async (req, res, next) => {
     
 };
 
+const updateKegiatanStatus = async () => {
+    const currentDate = new Date();
+    
+    await Kegiatan.update(
+        { status: 'selesai' },
+        {
+            where: {
+                status: 'diterima',
+                selesai: {
+                    [Op.lt]: currentDate
+                }
+            }
+        }
+    );
+};
+
 const daftarPengajuan = async (req, res, next) => {
     try {
+
+    await updateKegiatanStatus();  // Tambahkan ini
+
     const currentDate = new Date();
 
     const pengajuans = await Kegiatan.findAll({
@@ -127,43 +146,43 @@ const tolakKegiatan = async (req, res, next) => {
 }
 
 const rekapPengajuan = async (req, res, next) => {
-
     try {
-    const currentDate = new Date();
+        await updateKegiatanStatus();  // Tambahkan ini
 
-    const pengajuans = await Kegiatan.findAll({
-        attributes: [
-            'idKegiatan', 'judul', 'gambar', 'deskripsi', 'npsn', 'namaSekolah', 
-            'lokasi', 'kuotaRelawan', 'mulai', 'selesai', 'status', 'dokumen', 
-            'createdAt', 'updatedAt'
-        ],
-        include: {
-            model: Umum,
-            as: 'umum',
-            attributes: ['nik', 'nama']
-        },
-        where: {
-            [Op.or]: [
-                { status: 'ditolak' },
-                {
-                    status: 'selesai',
-                    selesai: {
-                        [Op.lt]: currentDate
+        const currentDate = new Date();
+
+        const pengajuans = await Kegiatan.findAll({
+            attributes: [
+                'idKegiatan', 'judul', 'gambar', 'deskripsi', 'npsn', 'namaSekolah', 
+                'lokasi', 'kuotaRelawan', 'mulai', 'selesai', 'status', 'dokumen', 
+                'createdAt', 'updatedAt'
+            ],
+            include: {
+                model: Umum,
+                as: 'umum',
+                attributes: ['nik', 'nama']
+            },
+            where: {
+                [Op.or]: [
+                    { status: 'ditolak' },
+                    { status: 'selesai' },
+                    {
+                        status: 'diterima',
+                        selesai: {
+                            [Op.lt]: currentDate
+                        }
                     }
-                }
-            ]
-        }
-        
-    });
-    console.log(pengajuans);
-    res.render('admin/rekap_pengajuan', { title: 'Rekap Pengajuan', pengajuans });
-} catch (error) {
-    console.log(error);
-    res.status(500).json({ message: 'Internal server error', error });
-}
+                ]
+            }
+        });
 
+        console.log(pengajuans);
+        res.render('admin/rekap_pengajuan', { title: 'Rekap Pengajuan', pengajuans });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal server error', error });
+    }
 };
-
 
 
 module.exports = {

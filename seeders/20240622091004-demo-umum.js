@@ -14,22 +14,34 @@ module.exports = {
     */
     await queryInterface.bulkInsert('Umums', [
       {
-        nik: '123456789',
-        nama: 'John Doe',
+        nik: '1111111',
+        nama: 'Ilham Nofaldi',
         idUser: 2,
-        tanggalLahir: new Date('1990-01-01'),
-        alamat: 'Jl. Kebon Jeruk No. 1',
+        tanggalLahir: new Date('2004-06-23'),
+        alamat: 'Padang, Sumatera Barat',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        nik: '987654321',
-        nim: 'B654321',
-        nama: 'Jane Smith',
+        nik: '2222222',
+        nim: '2211522020',
+        nama: 'Naufal',
         idUser: 3,
-        tanggalLahir: new Date('1992-02-02'),
-        alamat: 'Jl. Mangga Dua No. 2',
-        cv: 'jane_smith_cv.pdf',
+        tanggalLahir: new Date('2004-06-23'),
+        alamat: 'Padang, Sumatera Barat',
+        cv: 'naufal.pdf',
+        universitas: 'Universitas Andalas',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        nik: '3333333',
+        nim: '2211522036',
+        nama: 'Mustafa Fathurrahman',
+        idUser: 4,
+        tanggalLahir: new Date('2004-06-23'),
+        alamat: 'Padang, Sumatera Barat',
+        cv: 'mustafa.pdf',
         universitas: 'Universitas Andalas',
         createdAt: new Date(),
         updatedAt: new Date()

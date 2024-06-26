@@ -1,88 +1,70 @@
-<%- include('head.ejs') %>
+<%- include('headUser.ejs') %>
+<!-- ========== END HEADER ========== -->
 <!-- Hero -->
-<div class="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>
-    <%= title %>
-  </title>
-  <link rel="stylesheet" href="/stylesheets/output.css" />
-</head>
-
-<body>
-  <!-- ========== HEADER ========== -->
- 
-  <!-- ========== END HEADER ========== -->
-  <!-- Hero -->
-  <div style="margin-top: 80px ; margin-bottom: 50px;"
-    class="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
+<div style="margin-top: 80px ; margin-bottom: 50px;" class="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
     <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
 
 
-      <!-- Title -->
-      <div class="mt-5 max-w-xl text-center mx-auto">
+    <!-- Title -->
+    <div class="mt-5 max-w-xl text-center mx-auto">
         <h1 class="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl">
-          Relawan Untuk Kita, Kita Untuk Relawan
+        Relawan Untuk Kita, Kita Untuk Relawan
         </h1>
-      </div>
-      <!-- End Title -->
-
-      <div class="mt-5 max-w-3xl text-center mx-auto">
-        <p class="text-lg text-gray-600"></p>
-      </div>
-
-      <!-- Buttons -->
-      <div class="mt-8 gap-3 flex justify-center">
-        <a class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full py-3 px-4"
-          href="#">
-          Ayo Mulai
-        </a>
-      </div>
-      <!-- End Buttons -->
     </div>
-  </div>
-  <!-- End Hero -->
+    <!-- End Title -->
 
-  <!-- Blog Article -->
-  <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
+    <div class="mt-5 max-w-3xl text-center mx-auto">
+        <p class="text-lg text-gray-600">Mari berkontribusi dalam membangun masa depan cerah bagi generasi penerus bangsa.</p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="mt-8 gap-3 flex justify-center">
+        <a class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-full py-3 px-4" href="#">
+        Ayo Mulai
+        </a>
+    </div>
+    <!-- End Buttons -->
+    </div>
+</div>
+<!-- End Hero -->
+
+<!-- Blog Article -->
+<div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
     <div class="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">
       <!-- Content -->
       <div class="lg:col-span-2">
         <div class="py-8 lg:pe-8">
-          <% kegiatanList.forEach(kegiatan=> { %>
-            <div class="bg-white rounded-lg shadow-md p-6 kegiatan-item "
+          <% pendaftaran.forEach(pendaftaran=> { %>
+            <div class="bg-white rounded-lg shadow-md p-6 kegiatan-item transition-transform hover:scale-105"
               style="background-color: rgb(255, 255, 255); padding-left: 50px; padding-right: 50px; margin-top: 20px;">
               <h2 class="text-2xl font-semibold mb-4">
-                <%= kegiatan.judul %>
+                <%= pendaftaran.kegiatan.judul %>
               </h2>
               <div class="flex items-start">
                 <div class="flex-shrink-0 mr-6">
-                  <img style="width: 200px;" src="/uploads/<%= kegiatan.gambar %>" alt="<%= kegiatan.judul %>"
+                  <img style="width: 200px;" src="uploads/<%=pendaftaran.kegiatan.gambar %>" alt="<%= pendaftaran.kegiatan.judul %>"
                     class="h-48 object-cover rounded-md mb-4">
                 </div>
-                
                 <div style=" padding-left: 20px;">
                   <p class="text-gray-700 mb-4">
-                    <%= kegiatan.deskripsi %>
-                  </p>
+                    <%= pendaftaran.kegiatan.deskripsi %>                  </p>
 
                 </div>
               </div>
               <div class="flex justify-between">
                 <p class="text-gray-500 mb-2"><strong>Kuota:</strong>
-                  <%= kegiatan.kuotaRelawan %>
+                  <%= pendaftaran.kegiatan.kuotaRelawan %>
                 </p>
                 <td class="size-px whitespace-nowrap">
-                  <a style="width:120px; height: 40px;background-color: #ED6F58; color: white;" href="/kegiatan/<%= kegiatan.idKegiatan %>"
+                  <a style="width:120px; height: 40px;background-color: #ED6F58; color: white;" href="/kegiatan/<%= pendaftaran.kegiatan.idKegiatan %>"
                     class="px-6 py-1.5 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm">
                     Detail
                   </a>
                 </td>
               </div>
               <p class="text-gray-500 mb-2"><strong>Waktu Kegiatan:</strong>
-                <%= kegiatan.mulai %> - <%= kegiatan.selesai %>
+                <%= moment(pendaftaran.kegiatan.mulai).format('DD') %>- <%= moment(pendaftaran.kegiatan.selesai).format('DD MMMM YYYY') %>
+              
               </p>
             </div>
 
@@ -90,7 +72,7 @@
         </div>
       </div>
       <!-- End Content -->
-
+  
       <!-- Sidebar -->
       <div class="lg:col-span-1 lg:w-full lg:h-full lg:bg-gradient-to-r lg:from-gray-50 lg:via-transparent lg:to-transparent">
         <div class="sticky top-0 start-0 py-8 lg:ps-8">
@@ -161,8 +143,9 @@
       <!-- End Sidebar -->
     </div>
   </div>
-  <!-- End Blog Article -->
-  <script src="/preline.js"></script>
-</body>
 
+  <!-- End Blog Article -->
+        <script src="/preline.js"></script>
+
+    </body>
 </html>

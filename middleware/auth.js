@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const { User } = require("../models");
+const { User, Umum } = require("../models");
 var session = require('express-session');
 
 const login = async (req, res, next) => {
@@ -68,13 +68,23 @@ const logout = (req, res, next) => {
 
 const daftar = async (req, res) => {
     try {
-    const { username, email, newPassword, hp } = req.body;
+    console.log(req.body);
+    const { username,nik,alamat, tanggalLahir,email, newPassword, hp } = req.body;
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     const newUser = await User.create({
-        username,
-        email,
+        username : username,
+        email: email,
         password: hashedPassword,
-        hp,
+        hp:hp,
+    });
+
+    const newUmum= await Umum.create({
+        idUser: newUser.id,
+        nik: nik,
+        nama: username,
+        alamat: alamat,
+        tanggalLahir: tanggalLahir,
+   
     });
     res.status(200).json({ message: 'Data berhasil disimpan', data: newUser });
     } catch (error) {
