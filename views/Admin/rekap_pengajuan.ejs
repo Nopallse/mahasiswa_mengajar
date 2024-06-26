@@ -67,7 +67,6 @@
             </svg>              
             Status
         </a>
-        
         </li>
     </ul>
 </div>
@@ -84,12 +83,12 @@
     <div class="flex flex-col">
       <div class="-m-1.5 overflow-x-auto">
         <div class="p-1.5 min-w-full inline-block align-middle">
-          <div class="bg-gray-700  border-x-gray-400 rounded-xl shadow-sm overflow-hidden border dark:border-neutral-700 dark:shadow-neutral-700/70">
+          <div class="bg-gray-700  border-x-gray-400 rounded-xl shadow-sm overflow-hidden border   :border-neutral-700   :shadow-neutral-700/70">
             <!-- Header -->
             <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-400">
               <div>
                 <h2 class="text-xl font-semibold text-white-800">
-                  Daftar Pengajuan
+                  Rekap Pengajuan
                 </h2>
               </div>
             </div>
@@ -97,7 +96,7 @@
               <div class="-m-1.5 overflow-x-auto">
                 <div class="p-1.5 min-w-full inline-block align-middle">
                   <div class="overflow-hidden">
-                    <table class="min-w-full divide-y divide-gray-60000 dark:divide-neutral-700">
+                    <table class="min-w-full divide-y divide-gray-60000   :divide-neutral-700">
                       <thead>
                         <tr>
                           <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-red uppercase align-middle">No</th>
@@ -109,7 +108,7 @@
                         </tr>
                       </thead>
                       <% pengajuans.forEach((pengajuan, index) => { %>
-                      <tbody class="divide-y divide-gray-500 dark:divide-neutral-700">
+                      <tbody class="divide-y divide-gray-500   :divide-neutral-700">
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red align-middle"><%= index + 1 %></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red align-middle"><%= pengajuan.umum.nama %></td>
@@ -118,12 +117,11 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red align-middle">
                                   <%= pengajuan.status === 'diterima' ? 'Berlangsung' : pengajuan.status === 'menunggu' ? 'Menunggu Persetujuan' : pengajuan.status %>
                                 </td>                               
-                                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red align-middle">                           
-                                  <a href="/admin/lihat-pengajuan/<%= pengajuan.idKegiatan %>" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-white-600 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-blue-700 dark:border-neutral-700 dark:text-white-800    dark:hover:bg-blue-900">
+                                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red align-middle">                         
+                                    <a href="/admin/lihat-pengajuan/<%= pengajuan.idKegiatan %>" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-white-600 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-blue-700 dark:border-neutral-700 dark:text-white-800    dark:hover:bg-blue-900">
 
-                                    Lihat                           
-                                </a>
-                                </td>
+                                      Lihat                           
+                                  </a></td>
                                 <td></td>
                             </tr>
                       </tbody>

@@ -53,7 +53,7 @@ const getKegiatanku = async (req, res) => {
         res.render('User/kegiatanku', {
             pendaftaran: pendaftaranList,
             umum,
-            title: 'Beranda',
+            title: 'Kegiatanku',
             moment
         });
     } catch (error) {
@@ -155,14 +155,21 @@ const download = async (req, res) => {
       paragraphLoop: true,
       linebreaks: true,
     });
-    console.log("ini adalah umum: ",umum.nama);
-    console.log("ini adalah pendaftaran: ",pendaftaranList.kegiatan.judul);
+
+    // const date = new Date(pengajuan.umum.tanggalLahir).toLocaleDateString() 
+    // mulai - selesai 
+    const startDate = moment(pendaftaranList.kegiatan.mulai).format('DD MMMM YYYY');
+    const endDate = moment(pendaftaranList.kegiatan.selesai).format('DD MMMM YYYY');
+    const tanggal = `${startDate} - ${endDate}`;
+    
+    console.log("ini adalah umum: ", umum.nama);
+    console.log("ini adalah pendaftaran: ", pendaftaranList.kegiatan.judul);
+    
     doc.setData({
         nama: umum.nama,
         kegiatan: pendaftaranList.kegiatan.judul,
-        tanggal: "tanggal",
-
-      });
+        tanggal: tanggal,
+    });
       doc.render();
       const buf = doc.getZip().generate({
         type: "nodebuffer",

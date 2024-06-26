@@ -116,7 +116,7 @@
             </p>
 
           </div>
-          <% if(pendaftaran.status=="menunggu") { %>
+          <% if(!pendaftaran) { %>
             <div style=" background-color: #ED6F58;width: 30%;border-radius: 20px; color: white;">
               <div style="margin-left: auto;margin-right: auto;padding: 20px 0px 20px 0px;width: 80%;">
                 <p class="text mb-2"><strong>Kuota Relawan:</strong>
@@ -134,7 +134,34 @@
                   Lamar Kegiatan
                 </a>
               </div>
-              <% }else if(pendaftaran.status=="diterima"){ %>
+              <% }else if(pendaftaran.status=="diterima" && kegiatan.status=="selesai"){ %>
+                
+                <div style=" background-color: #ED6F58;width: 30%;border-radius: 20px; color: white;">
+                  <div style="margin-left: auto;margin-right: auto;padding: 20px 0px 20px 0px;width: 80%;">
+                    <div style=" padding: 4px;background-color: white;color: #ED6F58; border-radius: 10px;"> Kamu sudah selesai mengikuti program ini </div>
+
+                    <p class="text mb-2"><strong>Kuota Relawan:</strong>
+                      <%= kegiatan.kuotaRelawan %>
+                    </p>
+                    <p class="text mb-2"><strong>Waktu Kegiatan:</strong>
+                      <%= moment(kegiatan.mulai).format('DD') %>- <%= moment(kegiatan.selesai).format('DD MMMM YYYY') %>
+                    </p>
+                    <p class="text mb-2"><strong>Sekolah :</strong>
+                      <%= kegiatan.namaSekolah %>
+
+                    </p>
+                    <form action="/kegiatan/<%= kegiatan.idKegiatan %>/download" method="POST" style="display: inline;">
+                      <button type="submit"
+                          class="px-6 py-1.5 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm"
+                          style="background-color: rgb(255, 255, 255); color: #ED6F58 ;height: 50px;width: 150px;">
+                          Download Sertifikat
+                      </button>
+                  </form>
+                    
+                  </div>
+                  <% }else if(pendaftaran.status=="menunggu"){ %>
+                 
+              
                 
                 <div style=" background-color: #ED6F58;width: 30%;border-radius: 20px; color: white;">
                   <div style="margin-left: auto;margin-right: auto;padding: 20px 0px 20px 0px;width: 80%;">
@@ -147,7 +174,7 @@
                       <%= moment(kegiatan.mulai).format('DD') %>- <%= moment(kegiatan.selesai).format('DD MMMM YYYY') %>
                     </p>
                     <p class="text mb-2"><strong>Sekolah :</strong>
-                      <%= pendaftaran.status %>
+                      <%= kegiatan.namaSekolah %>
 
                     </p>
                     <a href="/kegiatan/<%= kegiatan.idKegiatan %>/lamar"
@@ -157,12 +184,13 @@
                     </a>
                     
                   </div>
-                  
-                  <% }else if(pendaftaran.status=="selesai"){ %>
+                  <% }else if(pendaftaran.status=="diterima"){ %>
+                 
+              
                 
                     <div style=" background-color: #ED6F58;width: 30%;border-radius: 20px; color: white;">
                       <div style="margin-left: auto;margin-right: auto;padding: 20px 0px 20px 0px;width: 80%;">
-                        <div style=" padding: 4px;background-color: white;color: #ED6F58; border-radius: 10px;"> Kamu sudah selesai mengikuti program ini </div>
+                        <div style=" padding: 4px;background-color: white;color: #ED6F58; border-radius: 10px;"> kamu sudah mendaftar dan kegiatan ini sedang berlangsung </div>
     
                         <p class="text mb-2"><strong>Kuota Relawan:</strong>
                           <%= kegiatan.kuotaRelawan %>
@@ -171,20 +199,18 @@
                           <%= moment(kegiatan.mulai).format('DD') %>- <%= moment(kegiatan.selesai).format('DD MMMM YYYY') %>
                         </p>
                         <p class="text mb-2"><strong>Sekolah :</strong>
-                          <%= pendaftaran.status %>
+                          <%= kegiatan.namaSekolah %>
     
                         </p>
-                        <form action="/kegiatan/<%= kegiatan.idKegiatan %>/download" method="POST" style="display: inline;">
-                          <button type="submit"
-                              class="px-6 py-1.5 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm"
-                              style="background-color: rgb(255, 255, 255); color: #ED6F58 ;height: 50px;width: 150px;">
-                              Download Sertifikat
-                          </button>
-                      </form>
+                        <a href="/kegiatan/<%= kegiatan.idKegiatan %>/lamar"
+                          class="px-6 py-1.5 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm"
+                          style="background-color: rgb(255, 255, 255); color: #ED6F58 ;height: 50px;width: 150px;">
+                          Sedang berlangsung
+                        </a>
                         
                       </div>
-                      
                       <% } %>
+                  
                 </div>
             </div>
             <div class="flex justify-between mt-4">

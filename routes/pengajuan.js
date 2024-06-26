@@ -8,5 +8,6 @@ router.get('/daftar-pengajuan', requireAuth, pengajuan.daftarPengajuan);
 router.get('/lihat-pengajuan/:idKegiatan', requireAuth, pengajuan.lihatPengajuan);
 router.post('/terima-pengajuan/:idKegiatan', requireAuth, pengajuan.terimaKegiatan);
 router.post('/tolak-pengajuan/:idKegiatan', requireAuth, pengajuan.tolakKegiatan);
+router.get('/rekap-pengajuan', requireAuth, pengajuan.rekapPengajuan);
 
 module.exports = router;

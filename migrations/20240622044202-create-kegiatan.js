@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       status: {
-        type: Sequelize.ENUM('menunggu', 'diterima', 'ditolak'),
+        type: Sequelize.ENUM('menunggu', 'diterima', 'ditolak', 'selesai'),
         defaultValue: 'menunggu',
       },
       dokumen: {
